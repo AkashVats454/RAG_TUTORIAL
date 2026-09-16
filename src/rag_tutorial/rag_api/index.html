@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>API Query Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    #response {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+      white-space: pre-wrap;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Query API Demo</h2>
+  <label for="queryInput">Enter your query:</label><br>
+  <input type="text" id="queryInput" size="60" value="candidate worked company and time in that company"><br>
+  <button onclick="callApi()">Submit Query</button>
+
+  <div id="response"></div>
+
+  <script>
+    async function callApi() {
+      const query = document.getElementById("queryInput").value;
+      const responseDiv = document.getElementById("response");
+      responseDiv.textContent = "Fetching response...";
+
+      try {
+        const res = await fetch("http://127.0.0.1:8000/query", {
+          method: "POST",
+          headers: {
+            "accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ query: query })
+        });
+
+        if (!res.ok) {
+          throw new Error("API error: " + res.status);
+        }
+
+        const data = await res.json();
+        responseDiv.textContent = 
+          "Query: " + data.query + "\n\nResponse:\n" + data.response;
+      } catch (err) {
+        responseDiv.textContent = "Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
