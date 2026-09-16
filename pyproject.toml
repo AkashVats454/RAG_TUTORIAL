@@ -1,0 +1,27 @@
+[project]
+name = "rag-tutorial"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { email = "akash.mishra2@sky.uk" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "chromadb>=1.5.9",
+    "dotenv>=0.9.9",
+    "langchain-chroma>=1.1.0",
+    "langchain-community>=0.4.2",
+    "langchain-core>=1.6.0",
+    "langchain-google-genai>=4.3.5",
+    "langchain-openai>=1.6.0",
+    "pypdf>=6.16.2",
+    "selenium>=4.27.1",
+]
+
+[project.scripts]
+rag-tutorial = "rag_tutorial:main"
+
+[build-system]
+requires = ["uv_build>=0.12.6,<0.13.0"]
+build-backend = "uv_build"
